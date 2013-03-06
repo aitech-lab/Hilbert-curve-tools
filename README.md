@@ -23,6 +23,11 @@ Hilbert binary repesentation:
 
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/hilbert_b.png">
 
+Linux kernel
+============
+
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/vmlinuz-3.2.0-4-amd64.png">
+
 Lenna representation
 ====================
 
