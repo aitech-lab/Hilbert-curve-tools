@@ -14,4 +14,9 @@ Hilbert binary repesentation:
 
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/hilbert_b.png">
 
+Lenna raw representation
+========================
 
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna.png">
+
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_r.png">
