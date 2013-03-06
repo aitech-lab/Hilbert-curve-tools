@@ -17,8 +17,8 @@ Where r for rgb, g for grayscale and b for bitwise visualisation
 
 This code was created for redis bitstrings visualisation. 
 
-Self binary repesentation:
-=============================
+Self binary representation:
+==============================
 
      ./hilbert hilbert hilbert.png g
 
