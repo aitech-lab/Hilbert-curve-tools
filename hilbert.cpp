@@ -116,7 +116,7 @@ int main(int argc, char* argv[]) {
            for(int j=0;j<8; j++) {
               int x, y;
               d2xy(s, id, &x, &y);
-              if((memblock[i] & (1 << j)) == 1) {    
+              if(memblock[i] & (1 << j)) {    
                 img.draw_point(x,y,color);
               }
               id++;
