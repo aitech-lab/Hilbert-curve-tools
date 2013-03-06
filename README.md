@@ -5,6 +5,15 @@ Binary to Hilbert fractal converter
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/4/46/Hilbert_curve.gif">
 
+Usage
+-----
+
+   hilbert binary.file output.png [r|g|b]
+
+Where r for rgb, g for grayscale and b for bitwise visualisation
+
+This code was created for redis bitstrings visualisation. 
+
 Hilbert binary repesentation:
 =============================
 
@@ -18,15 +27,15 @@ Lenna representation
 ====================
 
 Original
-
+--------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna.png">
 
 Hilbertized raw
-
+---------------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_r.png">
 
 Binary representation
-
+---------------------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_bin_r.png">
 
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_bin_g.png">
@@ -38,18 +47,18 @@ Gradient representation
 ====================
 
 Original
-
+--------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/gradient.png">
 
 Hilbertized raw
-
+---------------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/gradient_r.png">
 
 Original
-
+--------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/rgradient.png">
 
 Hilbertized raw
-
+---------------
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/rgradient_r.png">
 
