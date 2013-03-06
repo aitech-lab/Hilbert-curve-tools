@@ -8,7 +8,7 @@ Binary to Hilbert fractal converter
 Usage
 -----
 
-   hilbert binary.file output.png [r|g|b]
+    hilbert binary.file output.png [r|g|b]
 
 Where r for rgb, g for grayscale and b for bitwise visualisation
 
