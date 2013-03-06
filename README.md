@@ -18,15 +18,14 @@ Lenna representation
 ====================
 
 Original
---------
+
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna.png">
 
 Hilbertized raw
----------------
+
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_r.png">
 
 Binary representation
----------------------
 
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_bin_r.png">
 
