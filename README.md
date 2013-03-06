@@ -34,4 +34,15 @@ Binary representation
 <img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/lenna_bin_b.png">
 
 
+Gradient representation
+====================
+
+Original
+
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/gradient.png">
+
+Hilbertized raw
+
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/gradient_r.png">
+
 
