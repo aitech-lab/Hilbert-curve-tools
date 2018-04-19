@@ -1,0 +1,19 @@
+54.64.0.0/13 (Amazon Technologies Inc.) Заблокирована
+18.236.0.0/15 (Amazon.com, Inc.) Заблокирована
+23.251.128.0/19 (Google LLC) Заблокирована
+174.138.0.0/17 (DigitalOcean, LLC) Заблокирована
+188.166.0.0/17 (Digital Ocean, Inc.) Заблокирована
+159.203.0.0/16 (DigitalOcean, LLC) Заблокирована
+128.199.0.0/16 (DigitalOcean Cloud) Заблокирована
+159.65.0.0/16 (DigitalOcean, LLC) Заблокирована
+52.32.0.0/16 (Amazon Technologies Inc.) Заблокирована
+54.212.0.0/15 (Amazon.com, Inc.) Заблокирована
+18.218.0.0/16 (Amazon Technologies Inc.) Заблокирована
+13.230.0.0/15 (Amazon Data Services Japan) Заблокирована
+35.176.0.0/15 (Amazon Data Services UK) Заблокирована
+195.154.0.0/17 (Iliad Entreprises Customers) Заблокирована
+51.136.0.0/15 (Microsoft Limited UK) Заблокирована
+46.101.128.0/17 (Digital Ocean, Inc.) Заблокирована
+185.166.212.0/23 (Clouding.io Virtual Machine Hosting) Заблокирована
+178.63.0.0/16 (Hetzner Online GmbH) Заблокирована
+
