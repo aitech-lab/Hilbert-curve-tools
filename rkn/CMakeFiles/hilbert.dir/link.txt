@@ -1,0 +1,1 @@
+/usr/bin/cc -g  -rdynamic CMakeFiles/hilbert.dir/hilbert.c.o  -o hilbert 

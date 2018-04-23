@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/peko/lab/Ailove-Hilbert/rkn/hilbert.c
+stdlib.h
+-
+stdio.h
+-
+unistd.h
+-
+ctype.h
+-
+string.h
+-
+stdint.h
+-
+kvec.h
+/home/peko/lab/Ailove-Hilbert/rkn/kvec.h
+
+/home/peko/lab/Ailove-Hilbert/rkn/kvec.h
+kvec.h
+/home/peko/lab/Ailove-Hilbert/rkn/kvec.h
+stdlib.h
+-
+
