@@ -87,13 +87,16 @@ class MaskCanvas
 
         for l in [range.start..range.end]
             p = d2xy(@h,l)
-            d[(p.x+p.y*@w)*4+0]+= color.r*(color.a/255.0) - d[(p.x+p.y*@w)*4+0]*(255.0-color.a)/255.0
-            d[(p.x+p.y*@w)*4+1]+= color.g*(color.a/255.0) - d[(p.x+p.y*@w)*4+1]*(255.0-color.a)/255.0
-            d[(p.x+p.y*@w)*4+2]+= color.b*(color.a/255.0) - d[(p.x+p.y*@w)*4+2]*(255.0-color.a)/255.0
+            k1 = color.a/255.0
+            k2 = 1.0 - k1
+            d[(p.x+p.y*@w)*4+0]*=k2; d[(p.x+p.y*@w)*4+0] +=color.r*k1
+            d[(p.x+p.y*@w)*4+1]*=k2; d[(p.x+p.y*@w)*4+1] +=color.g*k1
+            d[(p.x+p.y*@w)*4+2]*=k2; d[(p.x+p.y*@w)*4+2] +=color.b*k1
             d[(p.x+p.y*@w)*4+3] = 255
         @ctx.putImageData id, 0, 0
     clear: =>
-        @ctx.clearRect 0, 0, @w, @h
+        @ctx.fillStyle = "#000"
+        @ctx.fillRect 0, 0, @w, @h
 
     mousemove: (e)=>
         x = e.clientX-@b.left
@@ -114,19 +117,18 @@ hex2color = (hex)->
 draw = ()->
     for cidr in cidrs.innerHTML.split /\n/
         [cidr, color] = cidr.split /\s*#/
-        color?="7F7F7F7F"
+        color = colors_sel.options[colors_sel.selectedIndex].value[1..]
         color = hex2color color
-        console.log color
        	mask_cvs.plot_cidr cidr, color
 
 
 cidrs_sel  = document.getElementById "cidrs_sel"
 cidrs      = document.getElementById "cidrs"
 cvs        = document.getElementById "cvs"
+colors_sel = document.getElementById "colors_sel"
 cursor_ip  = document.getElementById "ip"
 
-
-mask_cvs = new MaskCanvas(cvs, 1)
+mask_cvs = new MaskCanvas(cvs, 2)
 
 cidrs_change = ->
     value = cidrs_sel.options[cidrs_sel.selectedIndex].value
