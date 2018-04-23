@@ -75,25 +75,27 @@ class MaskCanvas
         @b = cvs.getBoundingClientRect()
         @cvs.addEventListener "mousemove", @mousemove
 
-    plot_cidr: (cidr, color) =>
+    plot_cidrs: (cidrs, color) =>
         id = @ctx.getImageData 0, 0, @w, @h
         d = id.data
-        range = cidr2range cidr
-        console.log ip2hex(range.start), ip2hex(range.end)
+        for cidr in cidrs 
+            range = cidr2range cidr
+            console.log ip2hex(range.start), ip2hex(range.end)
 
-        range.start = range.start >>2*(8-@size)>>>0
-        range.end   = range.end   >>2*(8-@size)>>>0
-        console.log range.start, range.end
+            range.start = range.start >>2*(8-@size)>>>0
+            range.end   = range.end   >>2*(8-@size)>>>0
+            console.log range.start, range.end
 
-        for l in [range.start..range.end]
-            p = d2xy(@h,l)
-            k1 = color.a/255.0
-            k2 = 1.0 - k1
-            d[(p.x+p.y*@w)*4+0]*=k2; d[(p.x+p.y*@w)*4+0] +=color.r*k1
-            d[(p.x+p.y*@w)*4+1]*=k2; d[(p.x+p.y*@w)*4+1] +=color.g*k1
-            d[(p.x+p.y*@w)*4+2]*=k2; d[(p.x+p.y*@w)*4+2] +=color.b*k1
-            d[(p.x+p.y*@w)*4+3] = 255
+            for l in [range.start..range.end]
+                p = d2xy(@h,l)
+                k1 = color.a/255.0
+                k2 = 1.0 - k1
+                d[(p.x+p.y*@w)*4+0]*=k2; d[(p.x+p.y*@w)*4+0] +=color.r*k1
+                d[(p.x+p.y*@w)*4+1]*=k2; d[(p.x+p.y*@w)*4+1] +=color.g*k1
+                d[(p.x+p.y*@w)*4+2]*=k2; d[(p.x+p.y*@w)*4+2] +=color.b*k1
+                d[(p.x+p.y*@w)*4+3] = 255
         @ctx.putImageData id, 0, 0
+        
     clear: =>
         @ctx.fillStyle = "#000"
         @ctx.fillRect 0, 0, @w, @h
@@ -115,11 +117,10 @@ hex2color = (hex)->
     
 
 draw = ()->
-    for cidr in cidrs.innerHTML.split /\n/
-        [cidr, color] = cidr.split /\s*#/
-        color = colors_sel.options[colors_sel.selectedIndex].value[1..]
-        color = hex2color color
-       	mask_cvs.plot_cidr cidr, color
+    data = cidrs.innerHTML.split /\n/
+    data = data.map (l)-> l.split(/\s*#/)[0]
+    color = hex2color colors_sel.options[colors_sel.selectedIndex].value[1..]
+    mask_cvs.plot_cidrs data, color
 
 
 cidrs_sel  = document.getElementById "cidrs_sel"

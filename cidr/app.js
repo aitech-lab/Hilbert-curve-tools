@@ -145,33 +145,36 @@ MaskCanvas = (function() {
     this.size = size != null ? size : 0;
     this.mousemove = __bind(this.mousemove, this);
     this.clear = __bind(this.clear, this);
-    this.plot_cidr = __bind(this.plot_cidr, this);
+    this.plot_cidrs = __bind(this.plot_cidrs, this);
     this.ctx = this.cvs.getContext("2d");
     this.h = this.w = this.cvs.height = this.cvs.width = 1 << (8 + this.size);
     this.b = cvs.getBoundingClientRect();
     this.cvs.addEventListener("mousemove", this.mousemove);
   }
 
-  MaskCanvas.prototype.plot_cidr = function(cidr, color) {
-    var d, id, k1, k2, l, p, range, _i, _ref, _ref1;
+  MaskCanvas.prototype.plot_cidrs = function(cidrs, color) {
+    var cidr, d, id, k1, k2, l, p, range, _i, _j, _len, _ref, _ref1;
     id = this.ctx.getImageData(0, 0, this.w, this.h);
     d = id.data;
-    range = cidr2range(cidr);
-    console.log(ip2hex(range.start), ip2hex(range.end));
-    range.start = range.start >> 2 * (8 - this.size) >>> 0;
-    range.end = range.end >> 2 * (8 - this.size) >>> 0;
-    console.log(range.start, range.end);
-    for (l = _i = _ref = range.start, _ref1 = range.end; _ref <= _ref1 ? _i <= _ref1 : _i >= _ref1; l = _ref <= _ref1 ? ++_i : --_i) {
-      p = d2xy(this.h, l);
-      k1 = color.a / 255.0;
-      k2 = 1.0 - k1;
-      d[(p.x + p.y * this.w) * 4 + 0] *= k2;
-      d[(p.x + p.y * this.w) * 4 + 0] += color.r * k1;
-      d[(p.x + p.y * this.w) * 4 + 1] *= k2;
-      d[(p.x + p.y * this.w) * 4 + 1] += color.g * k1;
-      d[(p.x + p.y * this.w) * 4 + 2] *= k2;
-      d[(p.x + p.y * this.w) * 4 + 2] += color.b * k1;
-      d[(p.x + p.y * this.w) * 4 + 3] = 255;
+    for (_i = 0, _len = cidrs.length; _i < _len; _i++) {
+      cidr = cidrs[_i];
+      range = cidr2range(cidr);
+      console.log(ip2hex(range.start), ip2hex(range.end));
+      range.start = range.start >> 2 * (8 - this.size) >>> 0;
+      range.end = range.end >> 2 * (8 - this.size) >>> 0;
+      console.log(range.start, range.end);
+      for (l = _j = _ref = range.start, _ref1 = range.end; _ref <= _ref1 ? _j <= _ref1 : _j >= _ref1; l = _ref <= _ref1 ? ++_j : --_j) {
+        p = d2xy(this.h, l);
+        k1 = color.a / 255.0;
+        k2 = 1.0 - k1;
+        d[(p.x + p.y * this.w) * 4 + 0] *= k2;
+        d[(p.x + p.y * this.w) * 4 + 0] += color.r * k1;
+        d[(p.x + p.y * this.w) * 4 + 1] *= k2;
+        d[(p.x + p.y * this.w) * 4 + 1] += color.g * k1;
+        d[(p.x + p.y * this.w) * 4 + 2] *= k2;
+        d[(p.x + p.y * this.w) * 4 + 2] += color.b * k1;
+        d[(p.x + p.y * this.w) * 4 + 3] = 255;
+      }
     }
     return this.ctx.putImageData(id, 0, 0);
   };
@@ -209,17 +212,13 @@ hex2color = function(hex) {
 };
 
 draw = function() {
-  var cidr, color, _i, _len, _ref, _ref1, _results;
-  _ref = cidrs.innerHTML.split(/\n/);
-  _results = [];
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    cidr = _ref[_i];
-    _ref1 = cidr.split(/\s*#/), cidr = _ref1[0], color = _ref1[1];
-    color = colors_sel.options[colors_sel.selectedIndex].value.slice(1);
-    color = hex2color(color);
-    _results.push(mask_cvs.plot_cidr(cidr, color));
-  }
-  return _results;
+  var color, data;
+  data = cidrs.innerHTML.split(/\n/);
+  data = data.map(function(l) {
+    return l.split(/\s*#/)[0];
+  });
+  color = hex2color(colors_sel.options[colors_sel.selectedIndex].value.slice(1));
+  return mask_cvs.plot_cidrs(data, color);
 };
 
 cidrs_sel = document.getElementById("cidrs_sel");
@@ -251,7 +250,7 @@ cidrs_change = function() {
             return text = arguments[0];
           };
         })(),
-        lineno: 134
+        lineno: 135
       }));
       __iced_deferrals._fulfill();
     });
