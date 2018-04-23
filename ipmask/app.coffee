@@ -1,4 +1,3 @@
-
 # rotate/flip a quadrant appropriately
 rot = (n, p, r)->
     if r.y == 0
@@ -38,6 +37,7 @@ d2xy = (n, d)->
         s = s<<1
     p
 
+
 # >>>0 Трюк для перевода в uint32
 cidr2range = (cidr)->
     [ip, mask] = cidr.split "/"
@@ -51,11 +51,22 @@ cidr2range = (cidr)->
     end   = start | ~mask >>> 0
     start: start, end: end
 
+
 ip2hex = (ip)-> "00000000#{ip.toString(16)}"[-8..]
 ip2dec = (ip)->
     ip = ip2hex ip
     ip = ("#{parseInt(ip[i*2..i*2+1],16)}" for i in [0..3]).join "."
-    
+
+
+get_file = (file, cb)->
+    req = new XMLHttpRequest();
+    req.open 'GET', file
+    req.onloadend = ()->
+        console.log req
+        cb req.responseText
+    req.send();
+
+
 class MaskCanvas
 
     constructor:(@cvs, @size=0)->
@@ -63,8 +74,8 @@ class MaskCanvas
         @h = @w = @cvs.height = @cvs.width = 1<<(8+@size)
         @b = cvs.getBoundingClientRect()
         @cvs.addEventListener "mousemove", @mousemove
+
     plot_cidr: (cidr, color) =>
-        
         id = @ctx.getImageData 0, 0, @w, @h
         d = id.data
         range = cidr2range cidr
@@ -76,29 +87,62 @@ class MaskCanvas
 
         for l in [range.start..range.end]
             p = d2xy(@h,l)
-            d[(p.x+p.y*@w)*4+0] = color.r
-            d[(p.x+p.y*@w)*4+1] = color.g
-            d[(p.x+p.y*@w)*4+2] = color.b
-            d[(p.x+p.y*@w)*4+3] = color.a
+            d[(p.x+p.y*@w)*4+0]+= color.r*(color.a/255.0) - d[(p.x+p.y*@w)*4+0]*(255.0-color.a)/255.0
+            d[(p.x+p.y*@w)*4+1]+= color.g*(color.a/255.0) - d[(p.x+p.y*@w)*4+1]*(255.0-color.a)/255.0
+            d[(p.x+p.y*@w)*4+2]+= color.b*(color.a/255.0) - d[(p.x+p.y*@w)*4+2]*(255.0-color.a)/255.0
+            d[(p.x+p.y*@w)*4+3] = 255
         @ctx.putImageData id, 0, 0
-    
+    clear: =>
+        @ctx.clearRect 0, 0, @w, @h
+
     mousemove: (e)=>
         x = e.clientX-@b.left
         y = e.clientY-@b.top
-        console.log x,y
         ip = xy2d @h, {x:x, y:y}
-        console.log ip.toString(16)
         ip = ip << (8-@size)*2 >>>0
         cursor_ip.innerHTML = """#{ip2hex ip}\n#{ip2dec ip}"""
 
-cidrs     = document.getElementById "cidrs"
-cvs       = document.getElementById "cvs"
-cursor_ip = document.getElementById "ip"
 
-mask_cvs = new MaskCanvas(cvs, 2)
-console.log cidrs.innerHTML
-for cidr in cidrs.innerHTML.split "\n"
-	mask_cvs.plot_cidr(cidr, {r:0, g:0, b:0, a:128})
+hex2color = (hex)->
+    c = parseInt hex, 16
+    r: (c>>24)&0xFF
+    g: (c>>16)&0xFF
+    b: (c>> 8)&0xFF
+    a:  c     &0xFF
+    
+
+draw = ()->
+    for cidr in cidrs.innerHTML.split /\n/
+        [cidr, color] = cidr.split /\s*#/
+        color?="7F7F7F7F"
+        color = hex2color color
+        console.log color
+       	mask_cvs.plot_cidr cidr, color
+
+
+cidrs_sel  = document.getElementById "cidrs_sel"
+cidrs      = document.getElementById "cidrs"
+cvs        = document.getElementById "cvs"
+cursor_ip  = document.getElementById "ip"
+
+
+mask_cvs = new MaskCanvas(cvs, 1)
+
+cidrs_change = ->
+    value = cidrs_sel.options[cidrs_sel.selectedIndex].value
+    await get_file value, defer text
+    cidrs.innerHTML = text
+cidrs_sel.addEventListener "change", cidrs_change
+cidrs_change()
+
+draw_btn = document.getElementById "draw"
+draw_btn.addEventListener "click",draw
+clear_btn = document.getElementById "clear"
+clear_btn.addEventListener "click", -> mask_cvs.clear()
+
+cidrs.addEventListener "keydown", (e)->
+    draw() if e.code is "Enter" and e.ctrlKey
+
 
 console.log "start"
 
