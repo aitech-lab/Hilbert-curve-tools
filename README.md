@@ -37,6 +37,16 @@ Linux kernel
 
 Seems like my kernel has holes ;)
 
+DNA of Drosophila melanogaster (fruit fly)
+=========================================
+
+    ./hilbert_genome
+
+<a href="https://www.ncbi.nlm.nih.gov/genome/47?genome_assembly_id=1508903">
+<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/genome.png">
+</а>
+
+
 Lenna representation
 ====================
 
