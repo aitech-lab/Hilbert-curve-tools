@@ -43,8 +43,9 @@ DNA of Drosophila melanogaster (fruit fly)
     ./hilbert_genome
 
 <a href="https://www.ncbi.nlm.nih.gov/genome/47?genome_assembly_id=1508903">
-<img src="https://raw.github.com/ailove-lab/Ailove-Hilbert/master/genome.png">
-</а>
+source
+</a>
+<a href="./genome.png"><img src="./genome_small.jpg"></а>
 
 
 Lenna representation
