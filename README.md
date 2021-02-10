@@ -55,6 +55,11 @@ DNA of Drosophila melanogaster
 <img src="./genome_small.jpg" />
 </а>
 
+<img src="./codones_small.jpg" />
+<img src="./codones_01.png" />
+<img src="./codones_02.png" />
+<img src="./codones_03.png" />
+<img src="./codones_04.png" />
 
 Lenna representation
 ====================
