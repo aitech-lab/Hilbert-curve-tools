@@ -47,6 +47,8 @@ DNA of Drosophila melanogaster
 - [C]ytosine - Orange
 - [T]hymine - blue
 
+<a href="https://www.ncbi.nlm.nih.gov/genome/47?genome_assembly_id=1508903"><img src="./fruit-fly.jpg"></a>
+
 <a href="./genome.png"><img src="./genome_small.jpg"></а>
 
 
