@@ -37,14 +37,16 @@ Linux kernel
 
 Seems like my kernel has holes ;)
 
-DNA of Drosophila melanogaster (fruit fly)
-=========================================
+DNA of Drosophila melanogaster
+==============================
 
-    ./hilbert_genome
+<a href="https://www.ncbi.nlm.nih.gov/genome/47?genome_assembly_id=1508903">Part of genome of an fruit fly.</a> Image contains 67M nucleotides.
 
-<a href="https://www.ncbi.nlm.nih.gov/genome/47?genome_assembly_id=1508903">
-source
-</a>
+- [A]denine - Red
+- [G]uanine - Green
+- [C]ytosine - Orange
+- [T]hymine - blue
+
 <a href="./genome.png"><img src="./genome_small.jpg"></а>
 
 
